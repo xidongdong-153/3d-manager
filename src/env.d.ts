@@ -17,3 +17,11 @@ declare global {
     $dialog: DialogApiInjection
   }
 }
+
+// cesium 挂载全局
+import { Viewer } from 'cesium'
+declare global {
+  interface Window {
+    viewer: Viewer
+  }
+}

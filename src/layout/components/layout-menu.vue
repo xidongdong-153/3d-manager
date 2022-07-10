@@ -31,11 +31,11 @@ import {
   EarthSharp,
   Camera,
   AccessibilityOutline,
-  WineOutline as WineIcon
+  WineOutline as WineIcon,
+  BarChartSharp,
+  StatsChartSharp
 } from '@vicons/ionicons5'
-import {
-  MouseSharp
-} from '@vicons/material'
+import { MouseSharp, ShowChartRound, BarChartRound } from '@vicons/material'
 
 function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -70,7 +70,7 @@ const menuOptions: MenuOption[] = [
     children: [
       {
         label: '基础吧',
-        key: 'basic',
+        key: 'cesium-basic',
         icon: renderIcon(AccessibilityOutline),
         children: [
           {
@@ -91,7 +91,7 @@ const menuOptions: MenuOption[] = [
             icon: renderIcon(Camera)
           },
           {
-            label:() =>
+            label: () =>
               h(
                 RouterLink,
                 {
@@ -122,6 +122,54 @@ const menuOptions: MenuOption[] = [
       }
     ]
   }
+  // {
+  //   label: 'Echart~',
+  //   key: 'echarts-basic',
+  //   icon: renderIcon(StatsChartSharp),
+  //   children: [
+  //     {
+  //       label: '试试图表...',
+  //       key: 'chart',
+  //       icon: renderIcon(BarChartSharp),
+  //       children: [
+  //         {
+  //           label: () =>
+  //             h(
+  //               RouterLink,
+  //               {
+  //                 to: {
+  //                   name: 'BarChart',
+  //                   params: {
+  //                     lang: 'zh-CN'
+  //                   }
+  //                 }
+  //               },
+  //               { default: () => '柱状图' }
+  //             ),
+  //           key: 'bar',
+  //           icon: renderIcon(BarChartRound)
+  //         },
+  //         {
+  //           label: () =>
+  //             h(
+  //               RouterLink,
+  //               {
+  //                 to: {
+  //                   name: 'LineChart',
+  //                   params: {
+  //                     lang: 'zh-CN'
+  //                   }
+  //                 }
+  //               },
+  //               { default: () => '折线图' }
+  //             ),
+  //           key: 'line',
+  //           icon: renderIcon(ShowChartRound)
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
 ]
 
 // 点击菜单 回调
