@@ -131,3 +131,70 @@ declare global {
 下载引用即可！
 
 `yarn add -D @vicons/material @vicons/ionicons5`
+
+
+
+### Cesium加载
+
+安装:
+
+ `yarn add cesium`
+
+`yarn add -D vite-plugin-cesium`
+
+使用vite-plugin-cesium插件，即可开箱使用...
+
+vite.config.ts
+
+```ts
+// vite.config.ts
+...
+import cesium from 'vite-plugin-cesium'
+
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    ...
+    cesium()
+  ]
+    ...
+})
+
+```
+
+初始化cesium, initCesium.ts
+
+```ts
+import { Ion, Viewer, createWorldTerrain, createOsmBuildings } from 'cesium'
+
+const myToken: string =
+  'your token'
+Ion.defaultAccessToken = myToken
+
+/**
+ * 初始化viewer
+ * @returns viwer
+ */
+const initCesium = (): Viewer => {
+  const viewer = new Viewer('cesiumContainer', {
+    terrainProvider: createWorldTerrain(),
+    animation: false, //动画控制，默认true
+    baseLayerPicker: true, //地图切换控件(底图以及地形图)是否显示,默认显示true
+    fullscreenButton: false, //全屏按钮,默认显示true
+    geocoder: false, //地名查找,默认true
+    timeline: false, //时间线,默认true
+    vrButton: false, //双屏模式,默认不显示false
+    homeButton: false, //主页按钮，默认true
+    infoBox: false, //点击要素之后显示的信息,默认true
+    selectionIndicator: true //选中元素显示,默认true,
+  })
+  viewer.scene.primitives.add(createOsmBuildings())
+
+  return viewer
+}
+
+export default initCesium
+
+```
+
