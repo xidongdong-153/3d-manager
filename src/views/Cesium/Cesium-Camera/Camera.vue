@@ -1,5 +1,4 @@
 <template>
-  <div class="cameraContainer">
     <div class="camera-button">
       <n-button-group size="small">
         <n-button type="default" round>
@@ -18,12 +17,11 @@
           <template #icon>
             <n-icon><log-in-icon /></n-icon>
           </template>
-          ？？
+          ...
         </n-button>
       </n-button-group>
     </div>
     <div id="cesiumContainer" class="cesiumContainer"></div>
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -49,19 +47,16 @@ onMounted(() => {
 </script>
 
 <style lang="less">
-.cameraContainer {
-  height: 100%;
+.camera-button {
+  margin-bottom: 12px;
+}
 
-  .camera-button {
-    margin-bottom: 12px;
-  }
-
-  .cesiumContainer {
-    height: 95%;
-    .cesium-viewer {
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      border-radius: 8px;
-    }
+.cesiumContainer {
+  height: calc(100% - 60px);
+  .cesium-viewer {
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 8px;
   }
 }
+
 </style>

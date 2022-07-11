@@ -21,17 +21,17 @@ const routes = [
         name: 'Mouse',
         path: '/mouse',
         component: () => import('@/views/Cesium/Cesium-Mouse/Mouse.vue')
+      },
+      {
+        name: 'BarChart',
+        path: '/barchart',
+        component: () => import('@/views/Echarts/BarChart/Barchart.vue')
+      },
+      {
+        name: 'LineChart',
+        path: '/linechart',
+        component: () => import('@/views/Echarts/LineChart/LineChart.vue')
       }
-      // {
-      //   name: 'BarChart',
-      //   path: '/barchart',
-      //   component: () => import('@/views/Echarts/BarChart/Barchart.vue')
-      // },
-      // {
-      //   name: 'LineChart',
-      //   path: '/linechart',
-      //   component: () => import('@/views/Echarts/LineChart/LineChart.vue')
-      // }
     ]
   }
 ]

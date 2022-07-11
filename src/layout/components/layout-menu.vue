@@ -121,55 +121,55 @@ const menuOptions: MenuOption[] = [
         ]
       }
     ]
+  },
+  {
+    label: 'Echart~',
+    key: 'echarts-basic',
+    icon: renderIcon(StatsChartSharp),
+    children: [
+      {
+        label: '试试图表...',
+        key: 'chart',
+        icon: renderIcon(BarChartSharp),
+        children: [
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: 'BarChart',
+                    params: {
+                      lang: 'zh-CN'
+                    }
+                  }
+                },
+                { default: () => '柱状图' }
+              ),
+            key: 'bar',
+            icon: renderIcon(BarChartRound)
+          },
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: 'LineChart',
+                    params: {
+                      lang: 'zh-CN'
+                    }
+                  }
+                },
+                { default: () => '折线图' }
+              ),
+            key: 'line',
+            icon: renderIcon(ShowChartRound)
+          }
+        ]
+      }
+    ]
   }
-  // {
-  //   label: 'Echart~',
-  //   key: 'echarts-basic',
-  //   icon: renderIcon(StatsChartSharp),
-  //   children: [
-  //     {
-  //       label: '试试图表...',
-  //       key: 'chart',
-  //       icon: renderIcon(BarChartSharp),
-  //       children: [
-  //         {
-  //           label: () =>
-  //             h(
-  //               RouterLink,
-  //               {
-  //                 to: {
-  //                   name: 'BarChart',
-  //                   params: {
-  //                     lang: 'zh-CN'
-  //                   }
-  //                 }
-  //               },
-  //               { default: () => '柱状图' }
-  //             ),
-  //           key: 'bar',
-  //           icon: renderIcon(BarChartRound)
-  //         },
-  //         {
-  //           label: () =>
-  //             h(
-  //               RouterLink,
-  //               {
-  //                 to: {
-  //                   name: 'LineChart',
-  //                   params: {
-  //                     lang: 'zh-CN'
-  //                   }
-  //                 }
-  //               },
-  //               { default: () => '折线图' }
-  //             ),
-  //           key: 'line',
-  //           icon: renderIcon(ShowChartRound)
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
 ]
 
 // 点击菜单 回调
