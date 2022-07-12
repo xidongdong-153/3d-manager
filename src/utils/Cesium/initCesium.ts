@@ -19,10 +19,12 @@ const initCesium = (): Viewer => {
     vrButton: false, //双屏模式,默认不显示false
     homeButton: false, //主页按钮，默认true
     infoBox: false, //点击要素之后显示的信息,默认true
-    selectionIndicator: true //选中元素显示,默认true,
+    selectionIndicator: true, //选中元素显示,默认true,
+    shouldAnimate: true
   })
   viewer.scene.primitives.add(createOsmBuildings())
-
+  viewer._cesiumWidget._creditContainer.style.display = "none";
+  
   return viewer
 }
 

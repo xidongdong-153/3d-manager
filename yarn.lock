@@ -68,6 +68,13 @@
   dependencies:
     axios "*"
 
+"@types/cesium@^1.70.0":
+  version "1.70.0"
+  resolved "https://registry.npmmirror.com/@types/cesium/-/cesium-1.70.0.tgz#081afd9d890e31a751db1df2526cb8cbf182c578"
+  integrity sha512-awCNt8Exv6oT+GALMgorfLYw43H5/99ZdKpG4Ovtft7dKpaAPkLuqpD1AobSjjtJ7xaOKKTj5fzYj+JQnPuzAQ==
+  dependencies:
+    cesium "*"
+
 "@types/estree@*":
   version "0.0.52"
   resolved "https://registry.npmmirror.com/@types/estree/-/estree-0.0.52.tgz#7f1f57ad5b741f3d5b210d3b1f145640d89bf8fe"
@@ -400,7 +407,7 @@ caniuse-lite@^1.0.30001297, caniuse-lite@^1.0.30001359:
   resolved "https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001363.tgz#26bec2d606924ba318235944e1193304ea7c4f15"
   integrity sha512-HpQhpzTGGPVMnCjIomjt+jvyUu8vNFo3TaDiZ/RcoTrlOq/5+tC8zHdsbgFB6MxmaY+jCpsH09aD80Bb4Ow3Sg==
 
-cesium@^1.95.0:
+cesium@*, cesium@^1.95.0:
   version "1.95.0"
   resolved "https://registry.npmmirror.com/cesium/-/cesium-1.95.0.tgz#8a9036c58b9818406586259d3720a05f24e87a69"
   integrity sha512-59U0lZD/wmSJa4t9FcK1/sp6PyCpx7h8c4giLd8VM7LJDL6w0G0o4QGlZ4TSJTBe4VIClf+qPDUf47wyBu4YoA==

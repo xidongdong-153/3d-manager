@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import initCesium from '@/utils/Cesium/initCesium'
 import { Viewer } from 'cesium'
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import useFlyTo from './func/useFlyTo'
 import useLookAt from './func/useLookAt'
 import useViewBoundingSphere from './func/useViewBoundingSphere'
@@ -43,6 +43,11 @@ const initContainer = (): void => {
 
 onMounted(() => {
   initContainer()
+})
+
+onUnmounted(() => {
+  console.log('onUnmounted');
+  
 })
 </script>
 
