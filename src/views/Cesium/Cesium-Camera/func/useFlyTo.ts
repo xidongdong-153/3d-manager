@@ -1,4 +1,5 @@
-import { Cartesian3, Math, Viewer } from 'cesium'
+import { Cartesian3, Math } from 'cesium'
+import type { Viewer } from 'cesium'
 interface FlyTo {
   Degrees: Degrees[]
 }
