@@ -21,12 +21,13 @@
         </n-button>
       </n-button-group>
     </div>
-    <div id="cesiumContainer" class="cesiumContainer"></div>
+    <cesium-viewer />
 </template>
 
 <script setup lang='ts'>
-import initCesium from '@/utils/Cesium/initCesium'
-import { Viewer, Cartesian3 } from 'cesium'
+import CesiumViewer from '@/components/CesiumViewer.vue'
+import type { Viewer } from 'cesium'
+import {  Cartesian3 } from 'cesium'
 import { onMounted, onUnmounted, ref } from 'vue'
 
 import { LogInOutline as LogInIcon } from '@vicons/ionicons5'
@@ -34,8 +35,7 @@ import { LogInOutline as LogInIcon } from '@vicons/ionicons5'
 import MeasureSpaceDistance from './func/useMeasureSpaceDistance'
 
 const initContainer = (): void => {
-  let viewer: Viewer
-  viewer = initCesium()
+  let viewer: Viewer = window.viewer
 
   viewer.camera.flyTo({
 		destination : Cartesian3.fromDegrees(110.6543, 28.5363,5000000.0)

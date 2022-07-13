@@ -21,21 +21,20 @@
         </n-button>
       </n-button-group>
     </div>
-    <div id="cesiumContainer" class="cesiumContainer"></div>
+    <cesium-viewer />
 </template>
 
 <script setup lang="ts">
-import initCesium from '@/utils/Cesium/initCesium'
-import { Viewer } from 'cesium'
+import type { Viewer } from 'cesium'
 import { onMounted, onUnmounted, ref } from 'vue'
 import useFlyTo from './func/useFlyTo'
 import useLookAt from './func/useLookAt'
 import useViewBoundingSphere from './func/useViewBoundingSphere'
 import { LogInOutline as LogInIcon } from '@vicons/ionicons5'
+import CesiumViewer from '@/components/CesiumViewer.vue'
 
 const initContainer = (): void => {
-  let viewer: Viewer
-  viewer = initCesium()
+  let viewer: Viewer = window.viewer
   // useFlyTo(viewer)
   // useLookAt(viewer)
   useViewBoundingSphere(viewer)

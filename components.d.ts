@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CesiumViewer: typeof import('./src/components/CesiumViewer.vue')['default']
     Gloabl: typeof import('./src/components/Gloabl.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NButtonGroup: typeof import('naive-ui')['NButtonGroup']
