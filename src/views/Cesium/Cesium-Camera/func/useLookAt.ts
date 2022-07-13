@@ -1,4 +1,5 @@
-import { Cartesian3, HeadingPitchRange, Math, Viewer } from 'cesium'
+import { Cartesian3, HeadingPitchRange, Math } from 'cesium'
+import type { Viewer } from 'cesium'
 
 /**
  * 相机-lookAt

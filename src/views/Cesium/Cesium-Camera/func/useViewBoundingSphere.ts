@@ -4,10 +4,10 @@ import {
   HeadingPitchRoll,
   Math,
   Transforms,
-  Viewer,
   BoundingSphere,
   ClockViewModel
 } from 'cesium'
+import type { Viewer } from 'cesium'
 
 const position = Cartesian3.fromDegrees(116.39, 39.91, 1500)
 const orientation = Transforms.headingPitchRollQuaternion(
