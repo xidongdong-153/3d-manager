@@ -54,13 +54,4 @@ onUnmounted(() => {
 .camera-button {
   margin-bottom: 12px;
 }
-
-.cesiumContainer {
-  height: calc(100% - 60px);
-  .cesium-viewer {
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 8px;
-  }
-}
-
 </style>

@@ -8,6 +8,7 @@
     show-trigger
     @collapse="collapsed = true"
     @expand="collapsed = false"
+    :native-scrollbar="false"
   >
     <n-menu
       v-model:value="activeKey"
@@ -179,7 +180,4 @@ const handleUpdateValue = (key: string, item: MenuOption) => {
 </script>
 
 <style lang="less">
-.n-layout-sider {
-  min-height: calc(100vh - 60px);
-}
 </style>

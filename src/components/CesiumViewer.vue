@@ -19,7 +19,7 @@ onMounted(() => {
 
 <style lang='less'>
 .cesiumContainer {
-  height: calc(100% - 60px);
+  height: calc(100vh - 150px);
   .cesium-viewer {
     border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 8px;

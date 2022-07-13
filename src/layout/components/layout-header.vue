@@ -2,7 +2,7 @@
   <n-layout-header bordered>
     <h1 class="header-title">
       <n-icon size="32"> <game-controller-outline /> </n-icon>
-      <span>3D确实牛啊</span>
+      <span>不熟悉3D...</span>
     </h1>
   </n-layout-header>
 </template>
@@ -11,7 +11,7 @@
 import { GameControllerOutline } from '@vicons/ionicons5'
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .n-layout-header {
   height: 60px;
   line-height: 60px;

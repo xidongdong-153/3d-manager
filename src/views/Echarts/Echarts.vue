@@ -5,7 +5,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref, toRefs } from 'vue';
-import {  init, EChartsOption } from 'echarts';
+import {  init } from 'echarts';
+import type { EChartsOption } from 'echarts'
 
 const props = defineProps({
   options: {
@@ -15,6 +16,9 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['opt-change'])
+
+
 const { options } = toRefs(props);
 
 const container = ref<HTMLElement>();
@@ -23,9 +27,12 @@ const container = ref<HTMLElement>();
 
 
 onMounted(() => {
-
     const chart = init(container.value!, 'dark');
     chart.setOption(options.value)
+    
+    emit('opt-change', (options: any) => {
+      chart.setOption(options)
+    })
 
     window.onresize = function() {
       chart.resize()
@@ -33,9 +40,9 @@ onMounted(() => {
 })
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .chart-container {
   width: 100%;
-  height: calc(100% - 60px);
+  height: calc(100vh - 160px);
 }
 </style>
