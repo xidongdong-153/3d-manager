@@ -13,6 +13,7 @@ const initCesium = (): Viewer => {
     terrainProvider: createWorldTerrain(),
     animation: false, //动画控制，默认true
     baseLayerPicker: true, //地图切换控件(底图以及地形图)是否显示,默认显示true
+    // imageryProvider: true,
     fullscreenButton: false, //全屏按钮,默认显示true
     geocoder: false, //地名查找,默认true
     timeline: false, //时间线,默认true

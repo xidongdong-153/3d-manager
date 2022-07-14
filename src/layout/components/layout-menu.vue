@@ -36,7 +36,15 @@ import {
   BarChartSharp,
   StatsChartSharp
 } from '@vicons/ionicons5'
-import { MouseSharp, ShowChartRound, BarChartRound, ApiRound, CrueltyFreeOutlined, ScreenSearchDesktopOutlined } from '@vicons/material'
+import {
+  MouseSharp,
+  ShowChartRound,
+  BarChartRound,
+  ApiRound,
+  CrueltyFreeOutlined,
+  ScreenSearchDesktopOutlined,
+  EditLocationAltSharp
+} from '@vicons/material'
 
 function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -107,6 +115,23 @@ const menuOptions: MenuOption[] = [
               ),
             key: 'mouse-event',
             icon: renderIcon(MouseSharp)
+          },
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: 'Entity',
+                    params: {
+                      lang: 'zh-CN'
+                    }
+                  }
+                },
+                { default: () => '整点Entity' }
+              ),
+            key: 'entity',
+            icon: renderIcon(EditLocationAltSharp)
           }
         ]
       },
@@ -197,7 +222,7 @@ const menuOptions: MenuOption[] = [
               ),
             key: 'bar',
             icon: renderIcon(ScreenSearchDesktopOutlined)
-          },
+          }
           // {
           //   label: () =>
           //     h(
@@ -227,5 +252,4 @@ const handleUpdateValue = (key: string, item: MenuOption) => {
 }
 </script>
 
-<style lang="less">
-</style>
+<style lang="less"></style>

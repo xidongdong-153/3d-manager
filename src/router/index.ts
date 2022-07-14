@@ -23,6 +23,11 @@ const routes = [
         component: () => import('@/views/Cesium/Cesium-Mouse/Mouse.vue')
       },
       {
+        name: 'Entity',
+        path: '/entity',
+        component: () => import('@/views/Cesium/Cesium-Entity/Entity.vue')
+      },
+      {
         name: 'BarChart',
         path: '/barchart',
         component: () => import('@/views/Echarts/BarChart/Barchart.vue')
