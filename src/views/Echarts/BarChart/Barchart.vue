@@ -9,32 +9,65 @@ import { wbHot } from '@/api/freeApi'
 import { ref } from 'vue'
 
 interface WbHotResult {
-  hostWord: string[]
-  hostWordNum: string[]
+  hot_word: string
+  hot_word_num: number
+  url: string
 }
 
-const WbHotList = ref<WbHotResult[]>([])
+const WbHotList = ref<WbHotResult[]>()
 
 const chartSeries = []
 
-const getWbHot = async (callback: (option: any) => {}) => {
-  const result = await wbHot({ token: 'OQAPRjSJZF76QK9q', num: 10 })
+const getWbHot = async (setOptions: (option: any) => {}) => {
+  const { data } = await wbHot({ token: 'OQAPRjSJZF76QK9q', num: 20 })
 
-  WbHotList.value = result.data
+  WbHotList.value = data.data
 
   if (WbHotList.value) {
-    callback({
+    setOptions({
       title: {
         text: '微博热词', // 标题
         textStyle: {
           color: 'red'
         }
+      },
+      xAxis: {
+        type: 'value'
+      },
+      yAxis: {
+        type: 'category',
+        inverse: true,
+        data: WbHotList.value.map(item => {
+          return item.hot_word
+        }),
+        axisLabel: {
+          interval: 0,
+          rotate: 20,
+          margin: 8
+        }
+      },
+      series: [
+        {
+          type: 'bar',
+          barWidth: '30%',
+          data: WbHotList.value.map(item => {
+            return item.hot_word_num
+          })
+        }
+      ],
+      visualMap: {
+        // orient: 'horizontal',
+        // left: 'center',
+        min: 0,
+        max: 2500000,
+        // text: ['High Score', 'Low Score'],
+        dimension: 0,
+        inRange: {
+          color: ['#65B581', '#FFCE34', '#FD665F']
+        }
       }
     })
   }
-
-  // let
-  console.log(WbHotList.value)
 }
 // getWbHot()
 
@@ -49,35 +82,13 @@ const options: EChartsOption = {
       color: 'orange'
     }
   },
-  xAxis: {
-    type: 'category'
-  },
-  yAxis: {},
   grid: {
-    show: true
+    show: true,
+    containLabel: true
     // backgroundColor: 'rgba(248, 160, 238, 0.5)'
   },
   legend: {},
-  tooltip: {},
-  dataset: {
-    source: [
-      ['product', '2014', '2015', '2016'],
-      ['笨笨', 66.12, 77.11, 42.39],
-      ['憨憨', 35.12, 75.12, 62.39],
-      ['聪聪', 56.12, 31.11, 23.39]
-    ]
-  },
-  series: [
-    {
-      type: 'bar'
-    },
-    {
-      type: 'bar'
-    },
-    {
-      type: 'bar'
-    }
-  ]
+  tooltip: {}
 }
 </script>
 

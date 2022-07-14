@@ -8,8 +8,7 @@ const freeService: AxiosInstance = axios.create({
 // 响应拦截器
 freeService.interceptors.response.use(
   (response) => {
-    const { success, message, data } = response.data
-      return response.data
+      return response
   }
 )
 

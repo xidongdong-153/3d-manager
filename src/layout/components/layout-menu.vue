@@ -36,7 +36,7 @@ import {
   BarChartSharp,
   StatsChartSharp
 } from '@vicons/ionicons5'
-import { MouseSharp, ShowChartRound, BarChartRound } from '@vicons/material'
+import { MouseSharp, ShowChartRound, BarChartRound, ApiRound, CrueltyFreeOutlined, ScreenSearchDesktopOutlined } from '@vicons/material'
 
 function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -167,6 +167,54 @@ const menuOptions: MenuOption[] = [
             key: 'line',
             icon: renderIcon(ShowChartRound)
           }
+        ]
+      }
+    ]
+  },
+  {
+    label: 'FreeApi',
+    key: 'free-api',
+    icon: renderIcon(ApiRound),
+    children: [
+      {
+        label: '免费Api',
+        key: 'free-api-c',
+        icon: renderIcon(CrueltyFreeOutlined),
+        children: [
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: 'Search',
+                    params: {
+                      lang: 'zh-CN'
+                    }
+                  }
+                },
+                { default: () => '搜索' }
+              ),
+            key: 'bar',
+            icon: renderIcon(ScreenSearchDesktopOutlined)
+          },
+          // {
+          //   label: () =>
+          //     h(
+          //       RouterLink,
+          //       {
+          //         to: {
+          //           name: 'LineChart',
+          //           params: {
+          //             lang: 'zh-CN'
+          //           }
+          //         }
+          //       },
+          //       { default: () => '折线图' }
+          //     ),
+          //   key: 'line',
+          //   icon: renderIcon(ShowChartRound)
+          // }
         ]
       }
     ]

@@ -31,6 +31,19 @@ const routes = [
         name: 'LineChart',
         path: '/linechart',
         component: () => import('@/views/Echarts/LineChart/LineChart.vue')
+      },
+      {
+        name: 'FreeApi',
+        path: '/freeapi',
+        component: () => import('@/views/FreeApi/FreeApi.vue'),
+        redirect: '',
+        children: [
+          {
+            name: 'Search',
+            path: '/search',
+            component: () => import('@/views/FreeApi/Searchs/Searchs.vue')
+          }
+        ]
       }
     ]
   }
