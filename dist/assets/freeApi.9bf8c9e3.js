@@ -1,0 +1,1 @@
+import{a as e}from"./index.becf6c0c.js";const r=e.create({timeout:3e3});r.interceptors.response.use(t=>t);const a=t=>r({url:"https://www.mxnzp.com/api/jokes/list",params:t}),o=t=>r({url:"https://v2.alapi.cn/api/new/wbtop",params:t}),p=t=>r({url:"https://v2.alapi.cn/api/abbr",params:t});export{p as a,a as j,o as w};

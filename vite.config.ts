@@ -25,8 +25,14 @@ export default defineConfig({
     proxy: {
       '/Api': {
         target: 'http://typhoon.zjwater.gov.cn',
-        changeOrigin: true,
+        changeOrigin: true
       }
     }
+  },
+  build: {
+    // outDir: path.resolve(__dirname, 'build'),
+    // assetsDir: path.resolve(__dirname, 'build/assets'),
+    // cssCodeSplit: true,
+    // sourcemap: true
   }
 })

@@ -5,11 +5,15 @@ interface JokeParams {
 }
 
 interface JokeRes {
-  page: number
-  totalCount: number
-  totalPage: number
-  limit: number
-  list: []
+  code: number
+  data: {
+    page: number
+    totalCount: number
+    totalPage: number
+    limit: number
+    list: []
+  }
+  msg: string
 }
 
 interface WbHotParams {
