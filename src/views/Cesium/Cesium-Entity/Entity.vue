@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { typhoonData } from '@/api/zjApi';
-import { Cartesian3 } from 'cesium';
+import { Cartesian3, ScreenSpaceEventHandler, ScreenSpaceEventType, defined } from 'cesium';
 import { onMounted, ref } from 'vue';
 import drawPoint from './func/drawPoint'
 
@@ -28,7 +28,13 @@ const createPoint = async () => {
 		destination : Cartesian3.fromDegrees(Number(typhoonResult.value.centerlng), Number(typhoonResult.value.centerlat),5000000.0)
 	});
 
-  
+  // 鼠标事件
+  let handle = new ScreenSpaceEventHandler(viewer.scene.canvas)
+
+  handle.setInputAction(function(movement: any) {
+    let pick = viewer.scene.pick(movement.position)
+    defined(pick)
+  }, ScreenSpaceEventType.LEFT_CLICK)
   
   drawPoint(viewer, typhoonResult.value)
 }
