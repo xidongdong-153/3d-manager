@@ -10,6 +10,8 @@ import {
 } from 'cesium'
 import { Viewer, Entity } from 'cesium'
 
+// 参考文章... https://blog.csdn.net/qq_25064691/article/details/114546704
+
 // -------------------数据---------------------
 
 let index = 1
@@ -28,15 +30,15 @@ const watchDrawPoint = (viewer: Viewer, tooltip: HTMLElement): void => {
     tooltip.style.left = movement.endPosition.x + 45 + 'px'
     tooltip.style.top = movement.endPosition.y + 55 + 'px'
   }, ScreenSpaceEventType.MOUSE_MOVE)
-  handler.setInputAction((movement: { position: Cartesian2 }) => {
+
+  handler.setInputAction((click: { position: Cartesian2 }) => {
     let position = viewer.camera.pickEllipsoid(
-      movement.position,
+      click.position,
       viewer.scene.globe.ellipsoid
     )
     if (position) {
       let point = drawPoint(position, viewer, index++)
       tempEntities.push(point)
-      console.log(tempEntities)
     }
   }, ScreenSpaceEventType.LEFT_CLICK)
   handler.setInputAction(() => {

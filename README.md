@@ -202,6 +202,267 @@ export default initCesium
 
 
 
-## Cesium 基础...
+## Cesium ...
 
-相机、鼠标、.....
+
+
+### Mouse
+
+几个简单的 鼠标事件
+
+**ScreenSpaceEventHandler 屏幕空间事件处理器**
+
+可以处理用户输入时间，当前尝试鼠标左右键
+
+获取一个屏幕监听对象 `handler`
+
+```ts
+let handler: ScreenSpaceEventHandler | null = new ScreenSpaceEventHandler(
+    viewer.scene.canvas
+  )
+```
+
+
+
+`handler`的 setInputAction 事件
+
+setInputAction 参数：回调函数、点击事件
+
+```ts
+handler.setInputAction(() => {}, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
+```
+
+回调函数的参数根据事件的不同而变化
+
+单击：click 参数为  `click: { position: Cartesian2 }`
+
+移动: movement 参数为 `movement: { startPosition: Cartesian2, endPosition: Cartesian2 }`
+
+其他事件待尝试。。。
+
+
+
+试试绘制实体
+
+创建 实体的 数组集合
+
+```ts
+let tempEntities: Entity[] = []
+let tempPoints: Cartesian3[] = []
+```
+
+
+
+- 绘制点：
+
+  生成一个方法 watchDrawPoint
+
+  需要参数： viewer
+
+  
+
+  ```ts
+  const watchDrawPoint = (viewer: Viewer, tooltip: HTMLElement): void => {
+      ...
+   // 左键开始绘制点
+  handler.setInputAction((movement: { position: Cartesian2 }) => {
+      let position = viewer.camera.pickEllipsoid(
+        movement.position,
+        viewer.scene.globe.ellipsoid
+      )
+      if (position) {
+        let point = drawPoint(position, viewer, index++)
+        tempEntities.push(point)
+      }
+    }, ScreenSpaceEventType.LEFT_CLICK)
+  // 右键取消绘制点
+  handler.setInputAction(() => {
+      if (handler) {
+        tooltip.style.display = 'none'
+        handler.destroy() //关闭事件句柄
+      }
+      handler = null
+    }, ScreenSpaceEventType.RIGHT_CLICK)
+  }
+  ```
+
+  生成一个点 实体
+
+  ```ts
+  const drawPoint = (position: Cartesian3, viewer: Viewer, index: number) => {
+    const pointGeometry = viewer.entities.add({
+      name: '点' + index,
+      position,
+      point: {
+        color: Color.SKYBLUE,
+        pixelSize: 10,
+        outlineColor: Color.RED,
+        outlineWidth: 1,
+        disableDepthTestDistance: Number.POSITIVE_INFINITY
+      }
+    })
+    return pointGeometry
+  }
+  ```
+
+  
+
+- 绘制线：
+
+  生成一个方法 watchDrawPoint
+
+  需要参数： viewer
+
+  
+
+  ```ts
+  const watchPolyline = (viewer: Viewer, tooltip: HTMLElement): void => {
+  ...
+    handler.setInputAction((click: { position: Cartesian2 }) => {
+      let position = viewer.camera.pickEllipsoid(
+        click.position,
+        viewer.scene.globe.ellipsoid
+      )
+      if (position) {
+        tempPoints.push(position)
+      }
+      let tempLength = tempPoints.length
+      let point = drawPoint(tempPoints[tempPoints.length - 1], viewer, index++)
+      tempEntities.push(point)
+      if (tempLength > 1) {
+        let pointline = drawPolyline(
+          [tempPoints[tempPoints.length - 2], tempPoints[tempPoints.length - 1]],
+          viewer
+        )
+        if (pointline) tempEntities.push(pointline)
+      } else {
+        tooltip.innerText = '请绘制下一个点，右键结束'
+      }
+      return
+    }, ScreenSpaceEventType.LEFT_CLICK)
+    handler.setInputAction(() => {
+      if (handler) {
+        tooltip.style.display = 'none'
+        handler.destroy() //关闭事件句柄
+        tempPoints = []
+      }
+      handler = null
+    }, ScreenSpaceEventType.RIGHT_CLICK)
+  }
+  ```
+
+  生成线 实体
+
+  ```ts
+  const drawPolyline = (positions: Cartesian3[], viewer: Viewer) => {
+    if (positions.length < 1) return
+    const polylineGeometry = viewer.entities.add({
+      name: '线',
+      polyline: {
+        positions,
+        width: 5.0,
+        material: new PolylineGlowMaterialProperty({
+          color: Color.GOLD
+        }),
+        depthFailMaterial: new PolylineGlowMaterialProperty({
+          color: Color.GOLD
+        }),
+        arcType: 2
+      }
+    })
+    return polylineGeometry
+  }
+  ```
+
+  
+
+- 绘制面：
+
+  生成一个方法 watchDrawPoint
+
+  需要参数： viewer
+
+  
+
+  ```ts
+  const watchPolygon = (viewer: Viewer, tooltip: HTMLElement): void => {
+    ...
+  
+    handler.setInputAction((click: { position: Cartesian2 }) => {
+      let position = viewer.camera.pickEllipsoid(
+        click.position,
+        viewer.scene.globe.ellipsoid
+      )
+      if (position) {
+        tempPoints.push(position)
+      }
+      let tempLength = tempPoints.length
+      let point = drawPoint(tempPoints[tempPoints.length - 1], viewer, index++)
+      tempEntities.push(point)
+      if (tempLength > 1) {
+        let pointline = drawPolyline(
+          [tempPoints[tempPoints.length - 2], tempPoints[tempPoints.length - 1]],
+          viewer
+        )
+        if (pointline) tempEntities.push(pointline)
+      } else {
+        tooltip.innerText = '请绘制下一个点，右键结束'
+      }
+      return
+    }, ScreenSpaceEventType.LEFT_CLICK)
+  
+    handler.setInputAction((click: { position: Cartesian2 }) => {
+      let cartesian = viewer.camera.pickEllipsoid(
+        click.position,
+        viewer.scene.globe.ellipsoid
+      )
+      if (cartesian) {
+        let tempLength = tempPoints.length
+        if (tempLength < 3) {
+          window.$message.error('请选择3个以上的点再执行闭合操作命令')
+        } else {
+          //闭合最后一条线
+          let pointline = drawPolyline(
+            [tempPoints[tempPoints.length - 1], tempPoints[0]],
+            viewer
+          )
+          if (pointline && tempPoints && handler) {
+            tempEntities.push(pointline)
+            const polygon = drawPolygon(tempPoints, viewer)
+  
+            if (polygon) tempEntities.push(polygon)
+            tempPoints = []
+            handler.destroy() //关闭事件句柄
+            tooltip.style.display = 'none'
+          }
+          handler = null
+        }
+      }
+      return
+    }, ScreenSpaceEventType.RIGHT_CLICK)
+  }
+  ```
+
+  生成面 实体
+
+  ```ts
+  const drawPolygon = (positions: Cartesian3[], viewer: Viewer) => {
+    if (positions.length < 2) return
+  
+    const polygonGeometry = viewer.entities.add({
+      name: '线几何对象',
+      polygon: {
+        height: 5000,
+        hierarchy: new PolygonHierarchy(positions),
+        material: Color.GREEN.withAlpha(0.5),
+        distanceDisplayCondition: new DistanceDisplayCondition(1000, 10000000)
+      }
+    })
+    return polygonGeometry
+  }
+  ```
+
+  
+
+
+
