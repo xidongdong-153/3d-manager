@@ -32,8 +32,8 @@ const isDateDisabled = (timestamp: number): boolean => {
 const jokeList = ref<JokeResult[]>([])
 
 const getJoke = async () => {
-  const result = await jokeApi({page: 1, app_id: 'rgihdrm0kslojqvm', app_secret: 'WnhrK251TWlUUThqaVFWbG5OeGQwdz09'})
-  jokeList.value = result.data.list
+  const { data } = await jokeApi({page: 1, app_id: 'rgihdrm0kslojqvm', app_secret: 'WnhrK251TWlUUThqaVFWbG5OeGQwdz09'})
+  jokeList.value = data.data.list
   
   window.$message.info('拿到 一些笑话')
 }
