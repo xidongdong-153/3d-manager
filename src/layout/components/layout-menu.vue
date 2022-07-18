@@ -94,7 +94,7 @@ const menuOptions: MenuOption[] = [
                     }
                   }
                 },
-                { default: () => '学习相机' }
+                { default: () => '看看相机' }
               ),
             key: 'camera',
             icon: renderIcon(Camera)
@@ -111,7 +111,7 @@ const menuOptions: MenuOption[] = [
                     }
                   }
                 },
-                { default: () => '学习鼠标' }
+                { default: () => '动动鼠标' }
               ),
             key: 'mouse-event',
             icon: renderIcon(MouseSharp)
