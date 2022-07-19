@@ -28,6 +28,13 @@
     </n-button-group>
   </div>
   <div class="tooltip" ref="tooltip"></div>
+  <!-- 视角高度 海拔高度 经纬度 -->
+  <div class="show-coordinate" ref="showCoordinate">
+    <!-- <span class="show-item">视角高度: 121212 m</span>
+    <span class="show-item">海拔高度: -18.64 m</span>
+    <span class="show-item">经度: 121.212</span>
+    <span class="show-item">纬度: 21.212</span> -->
+  </div>
   <cesium-viewer />
 </template>
 
@@ -42,6 +49,7 @@ import { DrawOutlined } from '@vicons/material'
 
 import MeasureSpaceDistance from './func/useMeasureSpaceDistance'
 import { watchDrawPoint, watchPolyline, watchPolygon, clearAll } from './func/useDraw'
+import { getCoordinate } from './func/showCoordinate'
 
 const initContainer = (): void => {
   let viewer: Viewer = window.viewer
@@ -52,9 +60,11 @@ const initContainer = (): void => {
 
   // measure d
   const measure = MeasureSpaceDistance(viewer, {})
+  getCoordinate(viewer, showCoordinate.value)
 }
 
 const tooltip = ref()
+const showCoordinate = ref()
 
 const drawPoint = () => {
   let viewer: Viewer = window.viewer
@@ -107,6 +117,25 @@ onMounted(() => {
     border: 8px solid transparent;
     border-right-color: rgba(0, 0, 0, 0.5);
     z-index: 99;
+  }
+}
+
+.show-coordinate {
+  position: absolute;
+  left: 30px;
+  bottom: 24px;
+  padding: 0 5px;
+  // width: 440px;
+  height: 20px;
+  line-height: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+  border-radius: 2px;
+  z-index: 100;
+  transition: all 0.3s;
+  .show-item:nth-child(n + 2) {
+    margin-left: 5px;
   }
 }
 </style>

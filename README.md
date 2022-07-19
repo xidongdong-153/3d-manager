@@ -204,6 +204,66 @@ export default initCesium
 
 ## Cesium ...
 
+### Camera
+
+#### **viewer.camera.flyTo**
+
+destination： 聚焦的目的地，类型：Cartesian3 | Rectangle
+
+```ts
+destination: Cartesian3.fromDegrees(103.84, 31.15, 17850000)
+```
+
+orientation：方向(初始角度)，类型：{}: any
+
+```
+heading-代表镜头左右方向,正值为右,负值为左,360度和0度是一样的
+pitch-代表镜头上下方向,正值为上,负值为下.
+roll-代表镜头左右倾斜.正值,向右倾斜,负值向左倾斜
+
+角度转换方法 Math.toRadians 将度转换为弧度
+heading: Math.toRadians(348.4202942851978)
+```
+
+
+
+#### **viewr.camera.lookAt**
+
+center：目标中心点，类型：Cartesian3
+
+```ts
+const center = Cartesian3.fromDegrees(116.39, 39.91)
+```
+
+HeadingPitchRange(heading, pitch, range)：视角设置
+
+```
+heading-航向角（弧度）。类型：Number
+pitch-俯仰角（弧度）。类型：Number
+range-距中心的距离，以米为单位。类型：Number
+```
+
+
+
+#### **viewer.camera.viewBoundingSphere**
+
+设置相机，使当前视图包含提供的边界球。
+
+BoundingSphere：具有含中心和半径的包围球
+
+```
+center-边界球的中心, 类型：Cartesian3
+radius-包围球体的半径, 类型：Number
+```
+
+offset：[HeadingPitchRange](http://cesium.xin/cesium/cn/Documentation1.62/HeadingPitchRange.html) 在局部东北朝上的参考框中，距目标的偏移量
+
+```
+heading-航向角（弧度）。类型：Number
+pitch-俯仰角（弧度）。类型：Number
+range-距中心的距离，以米为单位。类型：Number
+```
+
 
 
 ### Mouse
@@ -242,7 +302,7 @@ handler.setInputAction(() => {}, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
 
 
 
-试试绘制实体
+#### 绘制点、线、面
 
 创建 实体的 数组集合
 
